@@ -16,6 +16,11 @@ const StyledWrapper = styled.div`
   border-radius: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+@media (max-width:639px) {
+ .form {
+    width: 350px;
+  }
+}
 
 ::placeholder {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -120,12 +125,12 @@ const StyledWrapper = styled.div`
 }`;
   return (
     <div className='flex justify-center '>
-      <StyledWrapper>
-        <div className='p-[20px_22px] '>
+      <StyledWrapper className=''>
+        <div className='p-[20px_40px] '>
         <h1 className='text-[25px] font-[650] '>Log in to Exclusive</h1>
         <p>Enter your details below</p>
         </div>
-      <form className="form">
+      <form className="form sm:w-[250px]">
         <div className="flex-column">
           <label>Email </label></div>
         <div className="inputForm">
