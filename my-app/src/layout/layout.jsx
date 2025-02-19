@@ -12,12 +12,60 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
+
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+
 export const Layout = () => {
+
+
+    const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+
+            
+            <div className=' p-[20px_20px] '>
+            <Link to="/" className='border-b-[1.5px] block text-[25px] font-[600] mb-[10px] cursor-pointer '>Home</Link>
+            <Link to="/contact" className='block text-[25px] font-[600]  mb-[10px]  cursor-pointer'>Contact</Link>
+            <hr />
+            <Link to="/about" className='block text-[25px] font-[600]  mb-[10px] mt-[10px] cursor-pointer '>About</Link>
+            <hr />
+            <Link to="/signUp" className='block  text-[25px] font-[600]  mb-[10px] mt-[10px] cursor-pointer'>Sign Up</Link>
+            <hr />
+            </div>
+
+    </Box>
+  );
+
   return (
     <div>
         <div className='p-[20px_40px]  flex justify-between mb-[40px] border-b-[1px] '>
 
-            <img className='w-[160px] ' src={logo} alt="" />
+            
+            
+            <div className=' hidden sm:block '>
+                <div className='flex gap-[10px] mt-[12px] '>
+                <MenuIcon sx={{marginTop:"8px"}}  onClick={toggleDrawer(true)} />
+                <h1 className='text-[25px] font-[700] hidden sm:block '>Exclusive</h1>
+                </div>
+            </div>
+
+            <img className='w-[160px] sm:hidden  ' src={logo} alt="" />
 
             <div className='flex gap-[40px] pt-[18px] sm:hidden '>
             <Link to="/" className='border-b-[1.5px] '>Home</Link>
@@ -29,8 +77,14 @@ export const Layout = () => {
             <div className='flex pt-[20px] gap-[15px] '>
                 <input type="search" placeholder='What are you looking for?' className='w-[220px] pl-[10px] h-[32px] border-[1px] rounded-[5px] sm:hidden ' />
                 <FavoriteBorderIcon />
-                <ShoppingCartIcon />
+                <Link to="/cart"><ShoppingCartIcon /></Link>
             </div>
+
+
+
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+            </Drawer>
             
 
         </div>

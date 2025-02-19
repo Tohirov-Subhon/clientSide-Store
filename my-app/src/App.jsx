@@ -7,6 +7,7 @@ import {About} from '@/pages/about/about'
 import {Contact} from '@/pages/contact/contact'
 import {SignUp} from '@/pages/sginUp/signUp'
 import { RouterProvider } from 'react-router'
+import { Cart } from './pages/cart/cart'
 
 export const App = () => {
 
@@ -30,6 +31,10 @@ export const App = () => {
         {
           path: '/signUp',
           element: <SignUp/>
+        },
+        {
+          path: '/cart',
+          element: <Cart/>
         }
       ]
     }
