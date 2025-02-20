@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import React from 'react'
 
@@ -31,21 +31,26 @@ export const Layout = () => {
 
     const [open, setOpen] = React.useState(false);
 
+    let {pathname}=useLocation()
+    // console.log(pathname);
+    
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+//   console.log(pathname);
+  
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
 
             
             <div className=' p-[20px_20px] '>
-            <Link to="/" className='border-b-[1.5px] block text-[25px] font-[600] mb-[10px] cursor-pointer '>Home</Link>
-            <Link to="/contact" className='block text-[25px] font-[600]  mb-[10px]  cursor-pointer'>Contact</Link>
+            <Link to="/" className={ `block text-[25px] font-[600] mb-[10px] cursor-pointer ${pathname=='/'? 'text-blue-500':'text-[black]'}` }>Home</Link>
+            <Link to="/contact" className={`block text-[25px] font-[600]  mb-[10px]  cursor-pointer ${pathname=='/contact'? 'text-blue-500':'text-[black]'}`}>Contact</Link>
             <hr />
-            <Link to="/about" className='block text-[25px] font-[600]  mb-[10px] mt-[10px] cursor-pointer '>About</Link>
+            <Link to="/about"  className={`block text-[25px] font-[600]  mb-[10px]  cursor-pointer ${pathname=='/about'? 'text-blue-500':'text-[black]'}`}>About</Link>
             <hr />
-            <Link to="/signUp" className='block  text-[25px] font-[600]  mb-[10px] mt-[10px] cursor-pointer'>Sign Up</Link>
+            <Link to="/signUp"  className={`block text-[25px] font-[600]  mb-[10px]  cursor-pointer ${pathname=='/signUp'? 'text-blue-500':'text-[black]'}`}>Sign Up</Link>
             <hr />
             </div>
 
@@ -68,10 +73,10 @@ export const Layout = () => {
             <img className='w-[160px] sm:hidden  ' src={logo} alt="" />
 
             <div className='flex gap-[40px] pt-[18px] sm:hidden '>
-            <Link to="/" className='border-b-[1.5px] '>Home</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/about">About</Link>
-            <Link to="/signUp">Sign Up</Link>
+            <Link to="/" className={ `block   mb-[10px] cursor-pointer ${pathname=='/'? 'border-b-[1.5px]':'text-[black]'}` }>Home</Link>
+            <Link to="/contact" className={ `block   mb-[10px] cursor-pointer ${pathname=='/contact'? 'border-b-[1.5px]':'text-[black]'}` }>Contact</Link>
+            <Link to="/about" className={ `block   mb-[10px] cursor-pointer ${pathname=='/about'? 'border-b-[1.5px]':'text-[black]'}` }>About</Link>
+            <Link to="/signUp" className={ `block   mb-[10px] cursor-pointer ${pathname=='/signUp'? 'border-b-[1.5px]':'text-[black]'}` }>Sign Up</Link>
             </div>
 
             <div className='flex pt-[20px] gap-[15px] '>

@@ -3,11 +3,12 @@ import { createBrowserRouter } from 'react-router-dom'
 import { Layout } from './layout/layout'
 
 import {Home} from '@/pages/home/home'
-import {About} from '@/pages/about/about'
-import {Contact} from '@/pages/contact/contact'
+import About from '@/pages/about/about'
+import Contact from '@/pages/contact/contact'
 import {SignUp} from '@/pages/sginUp/signUp'
 import { RouterProvider } from 'react-router'
 import { Cart } from './pages/cart/cart'
+import { AllProducts } from './pages/allProducts/allProducts'
 
 export const App = () => {
 
@@ -35,6 +36,10 @@ export const App = () => {
         {
           path: '/cart',
           element: <Cart/>
+        },
+        {
+          path: '/allProducts',
+          element: <AllProducts/>
         }
       ]
     }

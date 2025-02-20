@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
+
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import IMG1 from '@/assets/img/kids_3.jpg'
@@ -86,8 +89,8 @@ export const Home = () => {
 
           </div>
 
-          <div className='flex justify-center mb-[40px] '>
-            <ButtonRed wi="220px" he="40px" name="View All Products" />
+          <div className='flex justify-center mb-[40px] mt-[40px] '>
+            <Link to='/allProducts'><ButtonRed wi="220px" he="40px" name="View All Products"  /></Link>
           </div>
 
           <hr />
