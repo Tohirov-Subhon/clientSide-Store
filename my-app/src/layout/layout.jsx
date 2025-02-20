@@ -81,7 +81,7 @@ export const Layout = () => {
 
             <div className='flex pt-[20px] gap-[15px] '>
                 <input type="search" placeholder='What are you looking for?' className='w-[220px] pl-[10px] h-[32px] border-[1px] rounded-[5px] sm:hidden ' />
-                <FavoriteBorderIcon />
+                <Link to='/wishlist'><FavoriteBorderIcon /></Link>
                 <Link to="/cart"><ShoppingCartIcon /></Link>
             </div>
 

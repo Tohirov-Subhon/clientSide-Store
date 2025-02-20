@@ -9,6 +9,7 @@ import {SignUp} from '@/pages/sginUp/signUp'
 import { RouterProvider } from 'react-router'
 import { Cart } from './pages/cart/cart'
 import { AllProducts } from './pages/allProducts/allProducts'
+import { Wishlist } from './pages/wishList/wishlist'
 
 export const App = () => {
 
@@ -40,6 +41,10 @@ export const App = () => {
         {
           path: '/allProducts',
           element: <AllProducts/>
+        },
+        {
+          path: '/wishlist',
+          element: <Wishlist/>
         }
       ]
     }
