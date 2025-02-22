@@ -10,6 +10,8 @@ import { RouterProvider } from 'react-router'
 import { Cart } from './pages/cart/cart'
 import { AllProducts } from './pages/allProducts/allProducts'
 import { Wishlist } from './pages/wishList/wishlist'
+import { Register } from './pages/sginUp/register'
+
 
 export const App = () => {
 
@@ -45,6 +47,10 @@ export const App = () => {
         {
           path: '/wishlist',
           element: <Wishlist/>
+        },
+        {
+          path: '/register',
+          element: <Register/>
         }
       ]
     }

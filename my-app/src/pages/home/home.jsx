@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
+import reklama from '@/assets/reklama.svg'
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
@@ -15,20 +20,22 @@ import { ButtonRed } from '@/components/Button/buttonRed';
 import { HeadingDesc } from '@/components/headingDesc/headingDesc';
 import { Card1 } from '@/components/Cards/card1';
 import { Card2 } from '@/components/Cards/card2';
+import { useStore } from '@/store/store'
+
 
 export const Home = () => {
 
 
-  let data = [
-    {
-      id:12,
-      img:IMG1,
-      name:"HAVIT HV-G92 Gamepad",
-      price:"120",
-      count:"88",
-      starIcon:starIcon
-    }
-  ]
+  // let data = [
+  //   {
+  //     id:12,
+  //     img:IMG1,
+  //     name:"HAVIT HV-G92 Gamepad",
+  //     price:"120",
+  //     count:"88",
+  //     starIcon:starIcon
+  //   }
+  // ]
 
   let data2 = [
     {
@@ -62,11 +69,44 @@ export const Home = () => {
     
   ]
 
+  let {data = [] ,getProducts , dataCateg,gertCategory} = useStore()
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+
   return (
     <div className='p-[40px_40px]'>
       
       <div>
-        {/* Xoli */}
+      <div className="  grid grid-cols-2  md:grid-cols-12 gap-6">
+        <div className="w-[200px] md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block">
+          <ul className="space-y-3 text-gray-700">
+           {dataCateg.map((el) => (
+            <div key={el.id}>
+              <p>{el.subCategoryName}</p>
+            </div>
+           ))}
+          </ul>
+        </div>
+
+        <div className="md:col-span-8">
+          <div className="">
+            <Swiper navigation={true} modules={[Navigation]}>
+              <SwiperSlide>
+                <img src={reklama} alt="" className="rounded-lg w-full" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={reklama} alt="" className="rounded-lg w-full" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={reklama} alt="" className="rounded-lg w-full" />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
+      </div>
+
       </div>
 
       <div>
@@ -81,11 +121,18 @@ export const Home = () => {
             <ArrowCircleRightIcon sx={{width:"40px",height:"40px",color:"gray",cursor:"pointer"}}/>
           </div>
 
-          <div>
+          <div className='flex justify-between flex-wrap'>
             
-          {data.map((el) =>(
-            <Card1 id={el.id} img={el.img} name={el.name} price={el.price} starIcon={el.starIcon} count={el.count}  />
-          ))}
+          {
+            data?.map((el) => (
+            <div className='mb-[60px]'>
+              <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}  />
+            </div>
+            ))
+          }
+
+          {/* {console.log(data)} */}
+
 
           </div>
 

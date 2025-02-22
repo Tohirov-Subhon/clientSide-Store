@@ -26,6 +26,9 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import PersonIcon from '@mui/icons-material/Person';
+import { dialogClasses } from '@mui/material'
+
 export const Layout = () => {
 
 
@@ -50,7 +53,7 @@ export const Layout = () => {
             <hr />
             <Link to="/about"  className={`block text-[25px] font-[600]  mb-[10px]  cursor-pointer ${pathname=='/about'? 'text-blue-500':'text-[black]'}`}>About</Link>
             <hr />
-            <Link to="/signUp"  className={`block text-[25px] font-[600]  mb-[10px]  cursor-pointer ${pathname=='/signUp'? 'text-blue-500':'text-[black]'}`}>Sign Up</Link>
+            <Link to="/register"  className={`block text-[25px] font-[600]  mb-[10px]  cursor-pointer ${pathname=='/signUp'? 'text-blue-500':'text-[black]'}`}>Sign Up</Link>
             <hr />
             </div>
 
@@ -76,13 +79,14 @@ export const Layout = () => {
             <Link to="/" className={ `block   mb-[10px] cursor-pointer ${pathname=='/'? 'border-b-[1.5px]':'text-[black]'}` }>Home</Link>
             <Link to="/contact" className={ `block   mb-[10px] cursor-pointer ${pathname=='/contact'? 'border-b-[1.5px]':'text-[black]'}` }>Contact</Link>
             <Link to="/about" className={ `block   mb-[10px] cursor-pointer ${pathname=='/about'? 'border-b-[1.5px]':'text-[black]'}` }>About</Link>
-            <Link to="/signUp" className={ `block   mb-[10px] cursor-pointer ${pathname=='/signUp'? 'border-b-[1.5px]':'text-[black]'}` }>Sign Up</Link>
+            <Link to="/register" className={ `block   mb-[10px] cursor-pointer ${pathname=='/signUp'? 'border-b-[1.5px]':'text-[black]'}` }>Sign Up</Link>
             </div>
 
             <div className='flex pt-[20px] gap-[15px] '>
                 <input type="search" placeholder='What are you looking for?' className='w-[220px] pl-[10px] h-[32px] border-[1px] rounded-[5px] sm:hidden ' />
                 <Link to='/wishlist'><FavoriteBorderIcon /></Link>
                 <Link to="/cart"><ShoppingCartIcon /></Link>
+                <Link ><PersonIcon /></Link>
             </div>
 
 
