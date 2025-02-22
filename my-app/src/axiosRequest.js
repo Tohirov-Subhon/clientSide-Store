@@ -1,6 +1,6 @@
 import axios from "axios";
 export const axiosRequest = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL,
+  baseURL: "https://store-api.softclub.tj",
 });
 
 axiosRequest.interceptors.request.use(
@@ -15,3 +15,15 @@ axiosRequest.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+axiosRequest.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("access_token");
+      window.location.href = "/signUp";
+    }
+  }
+)
