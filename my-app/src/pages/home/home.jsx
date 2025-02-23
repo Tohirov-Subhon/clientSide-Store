@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -26,6 +26,7 @@ import { api } from '@/config/config';
 
 export const Home = () => {
 
+const [selectedCategory, setSelectedCategory] = useState("All");
 
   // let data = [
   //   {
@@ -70,10 +71,12 @@ export const Home = () => {
 
   ]
 
-  let { data = [], getProducts, dataCateg, gertCategory } = useStore()
+  let { data = [], getProducts, dataCateg, getCategory } = useStore()
 
   useEffect(() => {
     getProducts()
+    getCategory()
+
   }, [])
 
   return (
@@ -81,14 +84,20 @@ export const Home = () => {
 
       <div>
         <div className="  grid grid-cols-2  md:grid-cols-12 gap-6">
-          <div className="w-[200px] md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block">
-            {/* <ul className="space-y-3 text-gray-700">
-              {dataCateg.map((el) => (
-                <div key={el.id}>
-                  <p>{el.subCategoryName}</p>
-                </div>
+          <div className="w-[250px] md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block">
+            <ul className="space-y-3 text-gray-700">
+              {data.map((el) => (
+                <li
+                key={el.id}
+                className={`cursor-pointer p-2 rounded ${
+                  selectedCategory === el.categoryName ? "text-[red]" : "hover:bg-gray-200"
+                }`}
+                onClick={() => setSelectedCategory(el.categoryName)}
+              >
+                {el.categoryName}
+              </li>
               ))}
-            </ul> */}
+            </ul>
           </div>
 
           <div className="md:col-span-8">

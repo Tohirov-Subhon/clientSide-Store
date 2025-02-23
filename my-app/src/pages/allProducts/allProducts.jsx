@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useStore } from '@/store/store';
 
 
 
 
 export const AllProducts = () => {
+
+
+
+  let {data,getCategory} = useStore()
+
+  useEffect(() =>{
+    getCategory()
+  })
 
 
     const products = [
@@ -18,6 +27,7 @@ export const AllProducts = () => {
 
 
 
+
   return (
     <div className='p-[40px_40px] flex justify-between'>
         
@@ -26,15 +36,15 @@ export const AllProducts = () => {
       <aside className="w-1/4 p-5 bg-white shadow-md">
         <h2 className="font-bold text-lg mb-4">Categories</h2>
         <ul className="space-y-2">
-          {["All", "Electronics", "Gaming", "Fashion"].map((category) => (
+          {data.map((el) => (
             <li
-              key={category}
+              key={el.id}
               className={`cursor-pointer p-2 rounded ${
-                selectedCategory === category ? "text-[red]" : "hover:bg-gray-200"
+                selectedCategory === el.categoryName ? "text-[red]" : "hover:bg-gray-200"
               }`}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory(el.categoryName)}
             >
-              {category}
+              {el.categoryName}
             </li>
           ))}
         </ul>

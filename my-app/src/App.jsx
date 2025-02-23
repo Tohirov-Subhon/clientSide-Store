@@ -11,6 +11,9 @@ import { Cart } from './pages/cart/cart'
 import { AllProducts } from './pages/allProducts/allProducts'
 import { Wishlist } from './pages/wishList/wishlist'
 import { Register } from './pages/sginUp/register'
+import { patch } from '@mui/material'
+import { Info } from '@/pages/info/info'
+import { Checkout } from './pages/checkout/checkout'
 
 
 export const App = () => {
@@ -51,6 +54,14 @@ export const App = () => {
         {
           path: '/register',
           element: <Register/>
+        },
+        {
+          path: '/info',
+          element: <Info/>
+        },
+        { 
+          path: '/checkout',
+          element: <Checkout/>
         }
       ]
     }

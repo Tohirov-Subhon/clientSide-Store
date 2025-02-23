@@ -7,12 +7,14 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Button2 } from '@/components/Button/button2';
 import { ButtonRed } from '@/components/Button/buttonRed';
 import { useStore } from '@/store/store';
+import { Link } from 'react-router-dom';
 
 
 
 export const Cart = () => {
 
     
+    const [totalPrice,setTotalPrice] = useState(0)
     
 
     let {data,getCart,deleteCart} = useStore()
@@ -52,6 +54,7 @@ export const Cart = () => {
                     <td><input className='w-[50px] h-[30px] rounded-[3px] border-[1px] text-center '  type="number" value={count} /></td>
                     <td>${el.product.price * count}</td>
                     <td onClick={() => deleteCart(el.id)}><HighlightOffIcon  sx={{color:"red",cursor:"pointer"}} /></td>
+                    
                 </tr>
                 ) )}
             </tbody>
@@ -87,10 +90,10 @@ export const Cart = () => {
                 <hr />
                 <div className='pt-[15px] flex justify-between '>
                     <p className='font-[650] '>Total:</p>
-                    <h4 className='font-[650]'>$1750</h4>
+                    <h4 className='font-[650]'>{totalPrice}</h4>
                 </div>
                 <div className='flex justify-center mt-[25px] '>
-                    <ButtonRed name="Procees to checkout" wi="240px" he="40px" />
+                    <Link to='/checkout'><ButtonRed name="Procees to checkout" wi="240px" he="40px" /></Link>
                 </div>
             </div>
         </div>

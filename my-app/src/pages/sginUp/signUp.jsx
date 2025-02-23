@@ -209,7 +209,10 @@ export const SignUp = () => {
                 <span>Confirm password</span>
               </label> */}
               <button type='submit' className="submit" >Log In</button>
+              <div className='flex justify-between'>
               <p className="text-center cursor-pointer text-[#DB4444] ">Forget Password?</p>
+              <Link to='/register'><p className="text-center cursor-pointer text-[#DB4444] " >Register</p></Link>
+              </div>
             </form>
           </StyledWrapper>
      </div>
