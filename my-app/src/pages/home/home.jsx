@@ -86,7 +86,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         <div className="  grid grid-cols-2  md:grid-cols-12 gap-6">
           <div className="w-[250px] md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block">
             <ul className="space-y-3 text-gray-700">
-              {data.map((el) => (
+              {data.length>0&&data.map((el) => (
                 <li
                 key={el.id}
                 className={`cursor-pointer p-2 rounded ${
@@ -136,7 +136,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
             {
               data?.map((el) => (
 
-                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity} />
+                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity} className='gap-[10px]' />
               ))
             }
 
@@ -170,7 +170,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         {
           data?.map((el) => (
 
-            <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity} />
+            <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}  className='gap-[10px]' />
           ))
         }
       </div>
@@ -187,7 +187,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
           data?.map((el) => {
             // console.log(el);
 
-           return <Card1 id={el.id} img={ el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity} />
+           return <Card1 id={el.id} img={ el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}  className='gap-[10px]' />
           })
         }
       </div>
@@ -237,10 +237,10 @@ const [selectedCategory, setSelectedCategory] = useState("All");
       <HeadingDesc title="Our Products" desc="Explore Our Products" mt="120px" />
 
 
-      <div className='flex mt-[80px] flex-wrap gap-[15px] '>
+      <div className='flex mt-[80px] flex-wrap gap-[25px] '>
         {
           data?.map((el) => (
-            <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity} />
+            <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}   />
           ))
 
         }

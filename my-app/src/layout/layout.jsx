@@ -73,7 +73,7 @@ export const Layout = () => {
                 </div>
             </div>
 
-            <img className='w-[160px] sm:hidden  ' src={logo} alt="" />
+            <Link to="/" className={ `block   mb-[10px] cursor-pointer ${pathname=='/'? 'border-b-[1.5px]':'text-[black]'}` }><img className='w-[160px] sm:hidden  ' src={logo} alt="" /></Link>
 
             <div className='flex gap-[40px] pt-[18px] sm:hidden '>
             <Link to="/" className={ `block   mb-[10px] cursor-pointer ${pathname=='/'? 'border-b-[1.5px]':'text-[black]'}` }>Home</Link>

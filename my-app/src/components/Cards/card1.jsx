@@ -18,7 +18,7 @@ export const Card1 = ({id,name,img,price,starIcon,count,productInMyCart}) => {
           <div style={{backgroundImage:`url(${"https://store-api.softclub.tj/images/"+img})`}} className='w-[100%] h-[180px] mb-[10px] rounded-[10px] '>
               <div className='pl-[168px] pt-[5px]'>
                 <img src={like} alt="" className='w-[30px] h-[30px] mb-[10px] cursor-pointer' />
-                <Link to='/info'><img src={info} alt="" className='w-[30px] h-[30px]  cursor-pointer' /></Link>
+                <Link to={`/info/${id}`}><img src={info} alt="" className='w-[30px] h-[30px]  cursor-pointer' /></Link>
               </div>
           </div>
           <button disabled={productInMyCart} onClick={() => addToCart(id)} className='text-center bg-black w-[100%] h-[25px] text-white rounded-[3px] '>Add To Cart</button>

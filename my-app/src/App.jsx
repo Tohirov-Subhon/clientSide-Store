@@ -56,7 +56,7 @@ export const App = () => {
           element: <Register/>
         },
         {
-          path: '/info',
+          path: '/info/:id',
           element: <Info/>
         },
         { 
