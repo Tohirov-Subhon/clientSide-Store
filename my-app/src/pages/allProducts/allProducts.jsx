@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useStore } from '@/store/store';
+import { Card1 } from '@/components/Cards/card1';
 
 
 
@@ -8,11 +9,13 @@ export const AllProducts = () => {
 
 
 
-  let {data,getCategory} = useStore()
+  let {data,getCategory,getProducts} = useStore()
 
   useEffect(() =>{
     getCategory()
-  })
+    getProducts()
+
+  },[])
 
 
     const products = [
@@ -61,18 +64,24 @@ export const AllProducts = () => {
           </select>
         </div>
 
-        {/* Product Grid */}
-        <div className="flex gap-[20px] flex-wrap mb-[30px]">
-          {products.map((product) => (
-            <div key={product.id} className="w-[250px] bg-white p-4 rounded-lg shadow-md">
-              <img src={product.image} alt={product.name} className="w-full h-40 object-cover mb-3 rounded" />
-              <h3 className="text-lg font-semibold">{product.name}</h3>
-              <p className="text-red-500 font-bold">${product.price}</p>
-              {/* {product.tag && <span className="text-xs bg-green-200 text-green-700 px-2 py-1 rounded">{product.tag}</span>} */}
-              {/* <button className="mt-3 block w-full bg-blue-500 text-white py-2 rounded">Add to Cart</button> */}
-            </div>
-          ))}
-        </div>
+
+
+        
+                <div className='flex justify-between flex-wrap sm:ml-[50px]'>
+        
+                    {
+                     data.length>0&&data?.map((el) => (
+        
+                        <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+                      ))
+                    }
+        
+                    {/* {console.log(data)} */}
+        
+        
+                  </div>
+
+        
       </main>
     </div>
     </div>

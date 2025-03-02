@@ -3,7 +3,7 @@ import React from 'react'
 export const HeadingDesc = ({title,desc,mt}) => {
   return (
    <>
-     <div style={{marginTop:`${mt}`}}>
+     <div style={{marginTop:`${mt}`}} className='mb-[40px]'>
         <div className='flex'>
             <div className='w-[20px] h-[35px] rounded-[3px] bg-[#DB4444] '></div>
             <p className='text-[#DB4444] mt-[5px] ml-[8px] '>{title}</p>

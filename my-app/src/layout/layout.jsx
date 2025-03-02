@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import logo from '@/assets/logo.svg'
 import basket from '@/assets/basket.svg'
@@ -26,13 +26,26 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 
+
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
 import PersonIcon from '@mui/icons-material/Person';
 import { dialogClasses } from '@mui/material'
+import { useStore } from '@/store/store'
 
 export const Layout = () => {
 
-
-    const [open, setOpen] = React.useState(false);
+    let { cart, getCart} = useStore()
+        // console.log(total);
+        
+        // const [count,setCount] = useState(1)
+    
+        useEffect(() => {
+          
+        }, [])
+ 
+    const [open1, setOpen] = React.useState(false);
 
     let {pathname}=useLocation()
     // console.log(pathname);
@@ -41,6 +54,17 @@ export const Layout = () => {
     setOpen(newOpen);
   };
 //   console.log(pathname);
+
+
+
+const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   
 
   const DrawerList = (
@@ -62,7 +86,7 @@ export const Layout = () => {
 
   return (
     <div>
-        <div className='p-[20px_40px]  flex justify-between mb-[40px] border-b-[1px] '>
+        <div className='  p-[20px_40px]  flex justify-between mb-[40px] border-b-[1px] '>
 
             
             
@@ -85,20 +109,46 @@ export const Layout = () => {
             <div className='flex pt-[20px] gap-[15px] '>
                 <input type="search" placeholder='What are you looking for?' className='w-[220px] pl-[10px] h-[32px] border-[1px] rounded-[5px] sm:hidden ' />
                 <Link to='/wishlist'><FavoriteBorderIcon /></Link>
-                <Link to="/cart"><ShoppingCartIcon /></Link>
-                <Link ><PersonIcon /></Link>
+                <div>
+                <Link to="/cart"><ShoppingCartIcon  /></Link>
+                <div className='w-[20px] h-[20px] bg-[red] rounded-[50%] absolute mt-[-30px] ml-[20px] text-center'><p className='mt-[-3px] text-white '>{cart.length}</p></div>
+                </div>
+                <PersonIcon sx={{cursor:"pointer"}} 
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+                >
+
+
+                </PersonIcon>
+
+                <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <Link to='/signUp'><MenuItem onClick={() => {handleClose(),localStorage.removeItem("access_token")}}>Logout</MenuItem></Link>
+      </Menu>
+                
             </div>
 
 
 
-            <Drawer open={open} onClose={toggleDrawer(false)}>
+            <Drawer open={open1} onClose={toggleDrawer(false)}>
             {DrawerList}
             </Drawer>
             
 
         </div>
         
-        <main>
+        <main className='mt-[100px]'>
             <Outlet />
         </main>
 

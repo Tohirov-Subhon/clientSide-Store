@@ -28,7 +28,7 @@ export const Cart = () => {
     const [price, setPrice] = useState(1)
 
 
-    let { data, getCart, deleteCart,decrementfunc,incrimentfunc,total,clearCart } = useStore()
+    let { cart, getCart, deleteCart,decrementfunc,incrimentfunc,total,clearCart } = useStore()
     // console.log(total);
     
     // const [count,setCount] = useState(1)
@@ -42,10 +42,15 @@ export const Cart = () => {
     return (
         <div>
 
+            <div className='flex p-[5px_60px] mb-[20px] sm:p-[20px] '>
+                <Link to='/'>    <p className='text-[gray] mr-[10px]'>Home /</p></Link>
+                <Link to='/cart'><p className='text-[black] mr-[10px]'>View Cart </p></Link>
+            </div>
+
             <div>
                 <table className='w-[90%] m-auto '>
                     <thead>
-                        <tr className='text-left h-[70px] '>
+                        <tr className='text-left h-[70px] sm:hidden '>
                             <th>Product</th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -54,10 +59,10 @@ export const Cart = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((el) => (
-                            <tr key={el?.product?.id} className='h-[70px] border-b-[1px] shadow-md '>
+                        {cart.length>0 && cart.map((el) => (
+                            <tr key={el?.product?.id} className='h-[70px] border-b-[1px] shadow-md  '>
                                 <td>
-                                    <div className='flex gap-[15px] '>
+                                    <div className='flex gap-[15px] sm:flex-wrap '>
                                         <img className='w-[50px] h-[50px]' src={`https://store-api.softclub.tj/images/${el?.product?.image}`} alt="" />
                                         <p className='pt-[13px]'>{el?.product?.productName}</p>
                                     </div>
@@ -79,23 +84,23 @@ export const Cart = () => {
                 </table>
             </div>
 
-            <div className='p-[40px_60px] flex justify-between mt-[50px] '>
-                <Button2 title="Return To Shop" color="black" wi="150px" he="45px" />
+            <div className='p-[40px_60px] sm:p-[20px_20px] flex justify-between mt-[50px] sm:flex-wrap  '>
+                <Link to='/'><Button2 title="Return To Shop" color="black" wi="150px" he="45px" /></Link>
 
-                <div className='flex gap-[10px] '>
+                <div className='flex gap-[10px] sm:mt-[40px] '>
                     <Button2 title="Update Cart" color="black" wi="150px" he="45px" />
                     <div onClick={clearCart}><Button2 title="Remove all" color="#DB4444" wi="150px" he="45px" text="#DB4444"  /></div>
                 </div>
 
             </div>
 
-            <div className='p-[40px_60px] flex justify-between '>
-                <div className='flex gap-[15px] '>
-                    <input type="text" placeholder='Coupon Code' className='w-[250px] h-[45px] border-[1px] pl-[10px] border-[black] rounded-[5px] ' />
-                    <Button2 title="Apply" color="#DB4444" wi="150px" he="45px" text="#DB4444" />
+            <div className='p-[40px_60px] sm:p-[20px_20px] sm:flex-wrap flex justify-between '>
+                <div className='flex gap-[15px] sm:flex-wrap '>
+                    <input type="text" placeholder='Coupon Code' className='w-[250px] h-[45px] border-[1px] pl-[10px] border-[black] rounded-[5px] sm:w-[180px] ' />
+                    <Button2 title="Apply" color="#DB4444" wi="150px" he="45px" text="#DB4444"  />
                 </div>
 
-                <div className='w-[350px] border-[1.5px] border-[black] p-[20px_20px] '>
+                <div className='w-[350px] border-[1.5px] sm:mt-[80px] border-[black] p-[20px_20px] '>
                     <h3 className='text-[20px] font-[650] '>Cart Total</h3>
                     <div className='pt-[15px] flex justify-between '>
                         <p>Subtotal:</p>

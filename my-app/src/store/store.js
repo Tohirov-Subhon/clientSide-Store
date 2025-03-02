@@ -3,9 +3,14 @@ import { create } from "zustand";
 
 import axios from "axios";
 import { axiosRequest } from "@/axiosRequest";
+import { Category } from "@mui/icons-material";
+import { dark } from "@mui/material/styles/createPalette";
+import { data } from "react-router-dom";
 
 export const useStore = create((set, get) => ({
   data: [],
+  category:[],
+  cart:[],
   // dataCateg: [],
   total: "",
   getProducts: async () => {
@@ -24,8 +29,7 @@ export const useStore = create((set, get) => ({
       let { data } = await axios.get(
         "https://store-api.softclub.tj/Category/get-categories"
       );
-      set({ data: data.data });
-      console.log({ data: data.data[0] });
+      set({ category: data.data });
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +49,7 @@ export const useStore = create((set, get) => ({
       let { data } = await axiosRequest.get(
         "https://store-api.softclub.tj/Cart/get-products-from-cart"
       );
-      set({ data: data.data[0].productsInCart });
+      set({ cart: data.data[0].productsInCart });
       set({ total: data.data[0].totalPrice });
       // console.log({data:data.data});
     } catch (error) {

@@ -71,7 +71,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
   ]
 
-  let { data = [], getProducts, dataCateg, getCategory } = useStore()
+  let { data ,category, getProducts, getCategory } = useStore()
 
   useEffect(() => {
     getProducts()
@@ -79,14 +79,48 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
   }, [])
 
+
+
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 23,
+    minutes: 23,
+    seconds: 19,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { hours, minutes, seconds } = prev;
+
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          minutes--;
+          seconds = 59;
+        } else if (hours > 0) {
+          hours--;
+          minutes = 59;
+          seconds = 59;
+        } else {
+          clearInterval(timer);
+        }
+
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+
   return (
     <div className='p-[40px_40px]'>
 
       <div>
-        <div className="  grid grid-cols-2  md:grid-cols-12 gap-6">
-          <div className="w-[250px] md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block">
+        <div className="flex gap-[50px] flex-wrap ">
+          <div className="w-[250px]  md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block sm:w-[300px] ">
             <ul className="space-y-3 text-gray-700">
-              {data.length>0&&data.map((el) => (
+              {category.length>0&&category.map((el) => (
                 <li
                 key={el.id}
                 className={`cursor-pointer p-2 rounded ${
@@ -100,11 +134,11 @@ const [selectedCategory, setSelectedCategory] = useState("All");
             </ul>
           </div>
 
-          <div className="md:col-span-8">
+          <div className="w-[800px] h-[750px] sm:w-[300px]  ">
             <div className="">
               <Swiper navigation={true} modules={[Navigation]}>
                 <SwiperSlide>
-                  <img src={reklama} alt="" className="rounded-lg w-full" />
+                  <img src={reklama} alt="" className=" rounded-lg w-full" />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src={reklama} alt="" className="rounded-lg w-full" />
@@ -121,22 +155,32 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
       <div>
 
-        <HeadingDesc title="Today’s" desc="Flash Sales" mt="80px" />
+        
 
-        <div>
-
-
-          <div>
+        <div className='flex justify-between mt-[80px] sm:mt-[-400px]'>
+        
+        <div className='flex sm:flex-wrap'>
+        <HeadingDesc title="Today’s" desc="Flash Sales" mt="0px" />
+        <p className="ml-[100px] mt-[42px] text-[30px] font-[700] sm:ml-[7px] sm:mt-[10px] sm:mb-[50px]  ">
+            {String(timeLeft.hours).padStart(2, "0")} :{" "}
+            {String(timeLeft.minutes).padStart(2, "0")} :{" "}
+            {String(timeLeft.seconds).padStart(2, "0")}
+          </p>
+        </div>
+        <div className='flex gap-[15px] mt-[40px] sm:mt-[50px] sm:hidden'>
             <ArrowCircleLeftIcon sx={{ width: "40px", height: "40px", color: "gray", cursor: "pointer" }} />
             <ArrowCircleRightIcon sx={{ width: "40px", height: "40px", color: "gray", cursor: "pointer" }} />
           </div>
+        </div>
 
-          <div className='flex justify-between flex-wrap'>
+        <div>
+
+          <div className='flex justify-between flex-wrap sm:ml-[50px]'>
 
             {
-              data?.map((el) => (
+             data.length>0&&data?.map((el) => (
 
-                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity} className='gap-[10px]' />
+                <Card1  id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
               ))
             }
 
@@ -160,37 +204,46 @@ const [selectedCategory, setSelectedCategory] = useState("All");
       <div className='flex justify-between '>
         <HeadingDesc title="Categories" desc="Browse By Category" mt="80px" />
 
-        <div className='flex gap-[10px] mt-[130px] '>
+        <div className='flex gap-[10px] mt-[130px] sm:hidden '>
           <ArrowCircleLeftIcon sx={{ width: "40px", height: "40px", color: "gray", cursor: "pointer" }} />
           <ArrowCircleRightIcon sx={{ width: "40px", height: "40px", color: "gray", cursor: "pointer" }} />
         </div>
       </div>
 
-      <div className='flex justify-between flex-wrap mt-[50px] mb-[50px] '>
-        {
-          data?.map((el) => (
+        <div className='flex justify-between flex-wrap sm:ml-[50px]'>
 
-            <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}  className='gap-[10px]' />
-          ))
-        }
-      </div>
+            {
+             data.length>0&&data?.map((el) => (
+
+                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+              ))
+            }
+
+            {/* {console.log(data)} */}
+
+
+          </div>
 
       <hr />
 
       <div className='flex justify-between  sm:flex-wrap '>
         <HeadingDesc title="This Month" desc="Best Selling Products" mt="80px" />
-        <Link to='/allProducts'><ButtonRed name="View All" wi="120px" he="40px" mt="140px" sm="none" /></Link>
+        <div className='hidden'><Link to='/allProducts'><ButtonRed name="View All" wi="120px" he="40px" mt="140px" sm="none" /></Link></div>
       </div>
 
-      <div className='flex mt-[80px] flex-wrap gap-[15px]'>
-        {
-          data?.map((el) => {
-            // console.log(el);
+        <div className='flex justify-between flex-wrap sm:ml-[50px]'>
 
-           return <Card1 id={el.id} img={ el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}  className='gap-[10px]' />
-          })
-        }
-      </div>
+            {
+             data.length>0&&data?.map((el) => (
+
+                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+              ))
+            }
+
+            {/* {console.log(data)} */}
+
+
+          </div>
 
 
       <div className='w-[100%] h-[450px] bg-[black] text-[white] flex justify-between p-[20px_40px] mt-[150px] sm:flex-wrap sm:h-[850px] '  >
@@ -237,14 +290,19 @@ const [selectedCategory, setSelectedCategory] = useState("All");
       <HeadingDesc title="Our Products" desc="Explore Our Products" mt="120px" />
 
 
-      <div className='flex mt-[80px] flex-wrap gap-[25px] '>
-        {
-          data?.map((el) => (
-            <Card1 id={el.id} img={el.image} name={el.productName} price={el.price} starIcon={el.starIcon} count={el.quantity}   />
-          ))
+        <div className='flex justify-between flex-wrap sm:ml-[50px]'>
 
-        }
-      </div>
+            {
+             data.length>0&&data?.map((el) => (
+
+                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+              ))
+            }
+
+            {/* {console.log(data)} */}
+
+
+          </div>
 
       <div className='flex justify-center mt-[44px] '>
         <Link to='/allProducts'><ButtonRed wi="180px" he="45px" name="View All Products" /></Link>
@@ -257,7 +315,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
       </div>
 
 
-      <div className='flex justify-center gap-[120px] mt-[50px]  sm:flex-wrap  '>
+      <div className='flex justify-center gap-[120px] mt-[80px]  sm:flex-wrap  '>
         <Card2 img={Truck} title="FREE AND FAST DELIVERY" desc="Free delivery for all orders over $140" />
         <Card2 img={headPhones} title="24/7 CUSTOMER SERVICE" desc="Friendly 24/7 customer support" />
         <Card2 img={service} title="MONEY BACK GUARANTEE" desc="We reurn money within 30 days" />

@@ -145,7 +145,7 @@ export const SignUp = () => {
 
   const navigate = useNavigate();
 
-
+  const [errorr,setErrorr] = useState(false)
  
 
   const login = async (e) => {
@@ -160,8 +160,10 @@ export const SignUp = () => {
     try {
       let {data} = await axios.post('https://store-api.softclub.tj/Account/login',user)
       localStorage.setItem('access_token',data.data)
+      setErrorr(false)
       navigate('/')
     } catch (error) {
+      setErrorr(true)
       console.log(error)
     }
   }
@@ -180,6 +182,9 @@ export const SignUp = () => {
   // }
 
 
+  if(localStorage.getItem('access_token')){
+
+  }
 
   
 
@@ -208,11 +213,13 @@ export const SignUp = () => {
                 <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required placeholder type="password" className="input" />
                 <span>Confirm password</span>
               </label> */}
+              {errorr && <p className='text-center text-[red] mb-[5px] mt-[5px] '>Account not found!</p>}
               <button type='submit' className="submit" >Log In</button>
               <div className='flex justify-between'>
               <p className="text-center cursor-pointer text-[#DB4444] ">Forget Password?</p>
               <Link to='/register'><p className="text-center cursor-pointer text-[#DB4444] " >Register</p></Link>
               </div>
+
             </form>
           </StyledWrapper>
      </div>
