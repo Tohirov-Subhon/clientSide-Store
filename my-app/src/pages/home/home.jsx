@@ -127,9 +127,9 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
       <div>
         <div className="flex gap-[50px] flex-wrap ">
-          <div className="w-[250px] h-[450px]  md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block sm:w-[300px] ">
-            <ul className="space-y-3 text-gray-700">
-              {category.length>0&&category.map((el) => (
+          <div className="w-[250px] h-[450px] sm:h-[80px] md:h-[80px] md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block sm:w-[300px] ">
+            <ul className="space-y-3 text-gray-700 sm:hidden md:hidden ">
+              {category.length>0&&category.slice(0,8).map((el) => (
                 <li
                 key={el.id}
                 className={`cursor-pointer p-2 rounded ${
@@ -141,6 +141,20 @@ const [selectedCategory, setSelectedCategory] = useState("All");
               </li>
               ))}
             </ul>
+
+            <select className='hidden sm:block md:block w-[270px] border-[1px] h-[50px] bg-transparent rounded-[5px]'>
+            {category.length>0&&category.slice(0,8).map((el) => (
+                <option
+                key={el.id}
+                className={`cursor-pointer p-2 rounded ${
+                  selectedCategory === el.categoryName ? "text-[red]" : "hover:bg-gray-200"
+                }`}
+                onClick={() => setSelectedCategory(el.categoryName)}
+              >
+                {el.categoryName}
+              </option>
+              ))}
+            </select>
           </div>
 
         <div className=" flex items-center justify-center min-h-screen mt-[-80px] sm:ml-[-40px] sm:mb-[320px]  ">
@@ -151,7 +165,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
-        className="w-[880px] h-[400px] sm:w-[400px] sm:h-[400px] "
+        className="w-[880px] h-[400px] sm:w-[390px] sm:h-[400px] "
       >
         <SwiperSlide>
           <div className="h-[400px] sm:h-[300px] ">
@@ -161,7 +175,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         </SwiperSlide>
         <SwiperSlide>
           <div className="h-[400px]   sm:h-[300px]">
-            <img className='h-[400px] sm:h-[300px] w-full ' src={reklama2} alt="" />
+            <img className='h-[400px] sm:h-[300px] w-full  ' src={reklama2} alt="" />
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -184,13 +198,13 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         
         <div className='flex sm:flex-wrap'>
         <HeadingDesc title="Today’s" desc="Flash Sales" mt="0px" />
-        <p className="ml-[100px] mt-[42px] text-[30px] font-[700] sm:ml-[7px] sm:mt-[10px] sm:mb-[50px]  ">
+        <p className="ml-[100px] mt-[42px] text-[30px] font-[700] sm:ml-[27px] sm:mt-[50px] sm:mb-[50px] sm:text-[25px]  ">
             {String(timeLeft.hours).padStart(2, "0")} :{" "}
             {String(timeLeft.minutes).padStart(2, "0")} :{" "}
             {String(timeLeft.seconds).padStart(2, "0")}
           </p>
         </div>
-        <div className='flex gap-[15px] mt-[40px] sm:mt-[50px] sm:hidden'>
+        <div className='flex gap-[15px] mt-[40px] sm:mt-[50px] sm:hidden '>
             <ArrowCircleLeftIcon sx={{ width: "40px", height: "40px", color: "gray", cursor: "pointer" }} />
             <ArrowCircleRightIcon sx={{ width: "40px", height: "40px", color: "gray", cursor: "pointer" }} />
           </div>
@@ -248,7 +262,7 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
           </div>
 
-      <hr />
+      <hr className=' mt-[100px]' />
 
       <div className='flex justify-between  sm:flex-wrap '>
         <HeadingDesc title="This Month" desc="Best Selling Products" mt="80px" />

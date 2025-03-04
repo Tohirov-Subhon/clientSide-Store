@@ -9,7 +9,7 @@ export const Checkout = () => {
 
 
 
-    let {data,getCart,total} = useStore()
+    let {cart,getCart,total} = useStore()
     
     
     useEffect(() => {
@@ -21,7 +21,7 @@ export const Checkout = () => {
 
 
     let navigate = useNavigate()
-
+   
 
    return (      
     <div >
@@ -80,7 +80,7 @@ export const Checkout = () => {
 
                 <div>
                     {
-                        data.map((el) => (
+                        cart?.map((el) => (
                             <div key={el.id} className='w-[400px] h-[70px]   rounded-[5px] mb-[20px] flex justify-between'>
                                 <div className='flex gap-[10px]'>
                                 <img className='w-[50px] h-[50px]' src={`${api}/images/${el.image}`} alt="" />
