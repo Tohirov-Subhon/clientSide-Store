@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useStore } from '@/store/store';
 import { Card1 } from '@/components/Cards/card1';
+import { Link } from 'react-router-dom';
 
 
 
@@ -9,7 +10,7 @@ export const AllProducts = () => {
 
 
 
-  let {data,getCategory,getProducts} = useStore()
+  let {data,getCategory,getProducts,category} = useStore()
 
   useEffect(() =>{
     getCategory()
@@ -32,14 +33,25 @@ export const AllProducts = () => {
 
 
   return (
-    <div className='p-[40px_40px] flex justify-between'>
+    <>
+
+    <div className='flex p-[5px_60px] mb-[20px] '>
+        <Link to='/'>    <p className='text-[gray] mr-[10px]'>Home /</p></Link>
+        <Link to='/cart'><p className='text-[black]'>Explore Our Products</p></Link>
+       </div>
+
+    <div className='p-[40px_40px] flex justify-between  '>
+
+
+       
         
-        <div className="flex ">
+        
+        <div className="flex sm:flex-wrap  ">
       {/* Sidebar */}
-      <aside className="w-1/4 p-5 bg-white shadow-md">
+      <aside className="w-1/4 p-5 bg-white shadow-md sm:hidden">
         <h2 className="font-bold text-lg mb-4">Categories</h2>
-        <ul className="space-y-2">
-          {data.map((el) => (
+        <ul className="space-y-2 ">
+          {category?.map((el) => (
             <li
               key={el.id}
               className={`cursor-pointer p-2 rounded ${
@@ -54,20 +66,33 @@ export const AllProducts = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 pl-[70px] p-6">
+      <main className="flex-1  pl-[70px] p-6 sm:pl-[0px] ">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Products</h1>
-          {/* <button className="bg-red-500 text-white px-4 py-2 rounded">More Products</button> */}
-          <select className='w-[200px] h-[35px] border-[1.5px] rounded-[5px] cursor-pointer ' >
+        <div className="flex justify-between items-center mb-[70px] sm:justify-center">
+          <h1 className="text-2xl font-bold sm:hidden ">Products</h1>
+          <select className='w-[200px] h-[35px] border-[1.5px] rounded-[5px] cursor-pointer ml-[700px] sm:ml-[0px] sm:hidden ' >
              <option>Populary</option>
+          </select>
+
+          <select className='w-[250px] h-[35px] border-[1.5px] rounded-[5px] cursor-pointer ml-[700px] sm:ml-[0px] hidden sm:block ' >
+             {data?.map((el) => (
+              <option
+              key={el.id}
+              className={`cursor-pointer p-2 rounded ${
+                selectedCategory === el.categoryName ? "text-[red]" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setSelectedCategory(el.categoryName)}
+            >
+              {el.categoryName}
+            </option>
+             ))}
           </select>
         </div>
 
 
 
         
-                <div className='flex justify-between flex-wrap sm:ml-[50px]'>
+                <div className='flex gap-[20px] flex-wrap sm:ml-[50px]'>
         
                     {
                      data.length>0&&data?.map((el) => (
@@ -85,5 +110,7 @@ export const AllProducts = () => {
       </main>
     </div>
     </div>
+
+    </>
   )
 }

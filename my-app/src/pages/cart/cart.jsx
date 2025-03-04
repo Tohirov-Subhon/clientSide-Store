@@ -59,23 +59,25 @@ export const Cart = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cart.length>0 && cart.map((el) => (
-                            <tr key={el?.product?.id} className='h-[70px] border-b-[1px] shadow-md  '>
+                        {cart.length>0 && cart?.map((el) => (
+                            <tr key={el?.product?.id} className='h-[70px] border-b-[1px] shadow-md sm:flex-wrap  '>
                                 <td>
-                                    <div className='flex gap-[15px] sm:flex-wrap '>
-                                        <img className='w-[50px] h-[50px]' src={`https://store-api.softclub.tj/images/${el?.product?.image}`} alt="" />
-                                        <p className='pt-[13px]'>{el?.product?.productName}</p>
+                                    <div className='flex gap-[15px] sm:block pl-[10px] '>
+                                        <img className='w-[50px] h-[50px] sm:mt-[10px] sm:mb-[10px] ' src={`https://store-api.softclub.tj/images/${el?.product?.image}`} alt="" />
+                                        <p className='pt-[13px] sm:pt-0 sm:mb-[10px]'>{el?.product?.productName}</p>
+                                        <td className='hidden sm:block sm:mb-[10px]'>${el?.product?.price}</td>
                                     </div>
                                 </td>
-                                <td>${el?.product?.price}</td>
+                                <td className='sm:hidden'>${el?.product?.price}</td>
                                 <td>
-                                    <div className='flex gap-[10px]'>
+                                    <div className='flex gap-[10px] '>
                                         <button onClick={() => decrementfunc(el.id)} className='w-[30px] h-[30px] rounded-[5px] border-[1.5px] border-[red] hover:duration-[0.5s] text-[red]  text-center '>-</button>
                                         <h1>{el.quantity}</h1>
                                         <button onClick={() => incrimentfunc(el.id)} className='w-[30px] h-[30px] rounded-[5px] border-[1.5px] bg-[white] border-[blue] text-[blue]  text-center '>+</button>
                                     </div>
+                                    <td className='hidden sm:block sm:mt-[10px] sm:ml-[10px] '>${el?.product?.price * el.quantity}</td>
                                 </td>
-                                <td>${el?.product?.price * el.quantity}</td>
+                                <td className='sm:hidden '>${el?.product?.price * el.quantity}</td>
                                 <td onClick={() => deleteCart(el.id)}><HighlightOffIcon sx={{ color: "red", cursor: "pointer" }} /></td>
 
                             </tr>

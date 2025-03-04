@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
 
-import reklama from '@/assets/reklama.svg'
+import reklama from '@/assets/img/reklama4.webp'
+import reklama2 from '@/assets/img/reklama2.png'
+import reklama3 from '@/assets/img/reklama3.jpg'
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
@@ -22,6 +20,17 @@ import { Card1 } from '@/components/Cards/card1';
 import { Card2 } from '@/components/Cards/card2';
 import { useStore } from '@/store/store'
 import { api } from '@/config/config';
+import { Card3 } from '@/components/Cards/card3';
+
+
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+
 
 
 export const Home = () => {
@@ -114,11 +123,11 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
 
   return (
-    <div className='p-[40px_40px]'>
+    <div className='p-[0px_40px]'>
 
       <div>
         <div className="flex gap-[50px] flex-wrap ">
-          <div className="w-[250px]  md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block sm:w-[300px] ">
+          <div className="w-[250px] h-[450px]  md:col-span-100 bg-white p-4 shadow-md rounded-lg  md:block sm:w-[300px] ">
             <ul className="space-y-3 text-gray-700">
               {category.length>0&&category.map((el) => (
                 <li
@@ -134,21 +143,35 @@ const [selectedCategory, setSelectedCategory] = useState("All");
             </ul>
           </div>
 
-          <div className="w-[800px] h-[750px] sm:w-[300px]  ">
-            <div className="">
-              <Swiper navigation={true} modules={[Navigation]}>
-                <SwiperSlide>
-                  <img src={reklama} alt="" className=" rounded-lg w-full" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src={reklama} alt="" className="rounded-lg w-full" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src={reklama} alt="" className="rounded-lg w-full" />
-                </SwiperSlide>
-              </Swiper>
-            </div>
+        <div className=" flex items-center justify-center min-h-screen mt-[-80px] sm:ml-[-40px] sm:mb-[320px]  ">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        className="w-[880px] h-[400px] sm:w-[400px] sm:h-[400px] "
+      >
+        <SwiperSlide>
+          <div className="h-[400px] sm:h-[300px] ">
+          <img className='h-[400px] sm:h-[300px] ' src={reklama} alt="" />
+            
           </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="h-[400px]   sm:h-[300px]">
+            <img className='h-[400px] sm:h-[300px] w-full ' src={reklama2} alt="" />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="h-[400px] sm:h-[300px] ">
+          <img className='h-[400px] sm:h-[300px] w-full ' src={reklama3} alt="" />
+
+          </div>
+        </SwiperSlide>
+      </Swiper>
+    </div>
         </div>
 
       </div>
@@ -175,12 +198,12 @@ const [selectedCategory, setSelectedCategory] = useState("All");
 
         <div>
 
-          <div className='flex justify-between flex-wrap sm:ml-[50px]'>
+          <div className='flex gap-[40px] flex-wrap sm:ml-[50px]'>
 
             {
              data.length>0&&data?.map((el) => (
 
-                <Card1  id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+                <Card1 key={el.id}  id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
               ))
             }
 
@@ -210,12 +233,13 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         </div>
       </div>
 
-        <div className='flex justify-between flex-wrap sm:ml-[50px]'>
+        <div className='flex  gap-[40px] flex-wrap sm:ml-[50px]'>
 
             {
-             data.length>0&&data?.map((el) => (
+             category.length>0&&category?.map((el) => (
 
-                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+              <Card3 key={el.id} id={el.id} img={el.categoryImage} name={el.categoryName} />
+            
               ))
             }
 
@@ -231,12 +255,12 @@ const [selectedCategory, setSelectedCategory] = useState("All");
         <div className='hidden'><Link to='/allProducts'><ButtonRed name="View All" wi="120px" he="40px" mt="140px" sm="none" /></Link></div>
       </div>
 
-        <div className='flex justify-between flex-wrap sm:ml-[50px]'>
+        <div className='flex gap-[40px] flex-wrap sm:ml-[50px]'>
 
             {
              data.length>0&&data?.map((el) => (
 
-                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+                <Card1 key={el.id} id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
               ))
             }
 
@@ -290,12 +314,16 @@ const [selectedCategory, setSelectedCategory] = useState("All");
       <HeadingDesc title="Our Products" desc="Explore Our Products" mt="120px" />
 
 
-        <div className='flex justify-between flex-wrap sm:ml-[50px]'>
+
+      
+
+
+        <div className='flex  gap-[40px] flex-wrap sm:ml-[50px]'>
 
             {
              data.length>0&&data?.map((el) => (
 
-                <Card1 id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
+                <Card1 key={el.id} id={el.id} productInMyCart={el.productInMyCart} img={el.image} name={el.productName} price={el.price}  count={el.quantity} className='gap-[10px]' />
               ))
             }
 

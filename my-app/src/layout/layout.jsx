@@ -86,7 +86,8 @@ const [anchorEl, setAnchorEl] = React.useState(null);
 
   return (
     <div>
-        <div className='  p-[20px_40px]  flex justify-between mb-[40px] border-b-[1px] '>
+        <div className='w-full h-[90px] shadow-md fixed top-0 left-0 bg-white p-[20px_40px] flex justify-between border-b-[1px] z-[100]'>
+
 
             
             
@@ -192,7 +193,7 @@ const [anchorEl, setAnchorEl] = React.useState(null);
                 </div>
             </div>
             <div className='border-t-[1px] pt-[20px] text-center'>
-                <p className='text-[gray]'><CopyrightIcon/> Copyright Rimel 2022. All right reserved</p>
+                <p className='text-[gray]'><CopyrightIcon/> Copyright Rimel 2025. All right reserved</p>
             </div>
         </div>
     </div>
